@@ -15,8 +15,6 @@ const MyFirstCustomComponent = ({
   rows,
   columns,
   fontSize,
-  afterPlayerPlays,
-  onWin,
 }) => {
   const [userTurn, setUserTurn] = useState(true);
 

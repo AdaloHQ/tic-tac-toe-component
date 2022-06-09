@@ -22,16 +22,6 @@
       "displayName": "Font Size",
       "type": "number",
       "default": "16"
-    },
-    {
-      "name": "onWin",
-      "displayName": "On Win",
-      "type": "action"
-    },
-    {
-      "name": "afterPlayerPlays",
-      "displayName": "After player plays",
-      "type": "action"
     }
   ]
 }
