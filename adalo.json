@@ -1,0 +1,12 @@
+{
+  "displayName": "myFirstCustomComponent",
+  "components": [
+    {
+      "name": "MyFirstCustomComponent",
+      "manifest": "./src/components/MyFirstCustomComponent/manifest.json"
+    }
+  ],
+  "author": "",
+  "description": "",
+  "logo": "./example-logo.png"
+}
