@@ -1,0 +1,52 @@
+{
+  "displayName": "Tic Tac Toe",
+  "defaultWidth": 300,
+  "defaultHeight": 300,
+  "components": "./index.js",
+  "icon": "./example-logo.png",
+  "props": [
+    {
+      "name": "rows",
+      "displayName": "Rows",
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "name": "columns",
+      "displayName": "Columns",
+      "type": "number",
+      "default": "3"
+    },
+    {
+      "name": "fontSize",
+      "displayName": "Font Size",
+      "type": "number",
+      "default": "16"
+    },
+    {
+        "name": "displayData",
+        "displayName": "Display Collection, \n must have 'row, column and value' rows \n leave empty for uncontrolled behavior",
+        "type": "list",
+        "default": []
+    },
+    {
+        "name": "onCreate",
+        "displayName": "Create action on your Collection \n leave empty for uncontrolled behavior",
+        "type": "action",
+        "arguments": [
+          {
+            "type": "number",
+            "displayName" : "row"
+          },
+          {
+            "type": "number",
+            "displayName" : "column"
+          },
+          {
+            "type": "number",
+            "displayName" : "value"
+          }
+        ]
+    }
+  ]
+}

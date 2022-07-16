@@ -1,12 +1,12 @@
 {
-  "displayName": "myFirstCustomComponent",
+  "displayName": "Tic-Tac-Toe",
   "components": [
     {
-      "name": "MyFirstCustomComponent",
-      "manifest": "./src/components/MyFirstCustomComponent/manifest.json"
+      "name": "TicTacToe",
+      "manifest": "./src/components/TicTacToe/manifest.json"
     }
   ],
-  "author": "",
-  "description": "",
+  "author": "Jose Estremadoyro",
+  "description": "The most basic board game, connect to a collection with row, column and an X or Y as values. filter by a game column, and even play multiplayer with the advanced list refresh option.",
   "logo": "./example-logo.png"
 }
