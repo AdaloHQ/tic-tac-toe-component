@@ -1,9 +1,11 @@
 {
-  "displayName": "Tic Tac Toe",
-  "defaultWidth": 300,
-  "defaultHeight": 300,
+  "displayName": "TicTacToe",
+  "defaultWidth": 150,
+  "defaultHeight": 150,
   "components": "./index.js",
-  "icon": "./example-logo.png",
+  "icon": "./Tic-Tac-Toe.png",
+  "resizeX": true,
+  "resizeY": true,
   "props": [
     {
       "name": "rows",
@@ -27,7 +29,7 @@
         "name": "displayData",
         "displayName": "Display Collection, \n must have 'row, column and value' rows \n leave empty for uncontrolled behavior",
         "type": "list",
-        "default": []
+        "listControl": {"sort": false, "limit": true }
     },
     {
         "name": "onCreate",
@@ -48,5 +50,32 @@
           }
         ]
     }
+  ],
+  "childComponents": [
+     {
+       "name": "cell",
+       "displayName": "Cells",
+       "role": "listItem",
+       "type": "list",
+       "reference": "displayData",
+       "props": [
+         {
+           "name": "row",
+           "displayName": "Row field",
+           "type": "number"
+         },
+         {
+           "name": "column",
+           "displayName": "Column field",
+           "type": "number"
+         },
+         {
+           "name": "value",
+           "displayName": "X or O",
+           "type": "text",
+           "default": ""
+         }
+       ]
+     }
   ]
 }

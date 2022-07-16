@@ -6,19 +6,14 @@ import { INITIAL_STATE, DEFAULT_VALUE } from './constants'
 const ComponentContext = React.createContext({})
 const ComponentProvider = ComponentContext.Provider
 
-const ROW = "c_9s1owx2040nk64ynyy2uqn3wu"
-const COLUMN =  "c_eqxlo7yvzzvozuuqmn014jepr"
-const VALUE = "c_5u6j105t88mwmhv56tb9ysgdj"
-
 const parseDisplayData = displayData => {
-  if (!displayData || !displayData[0]?._meta?.record) return []
+  if ( !displayData || !displayData?.[0]?.cell?.row === undefined) return []
   return displayData.map(
-    ({ _meta }) => {
-      const { record } = _meta
+    ({ cell: { row, column, value } }) => {
       return {
-        row: record[ROW],
-        column: record[COLUMN],
-        value: record[VALUE],
+        row,
+        column,
+        value: value?.[0],
       }
     }
   )
@@ -38,35 +33,29 @@ const TicTacToe = ({
     fontSize,
     onCreate,
   })
-  return (
-    <span></span>
-  )
-  const validData = !displayData || 
-    ( 
-      displayData.length === 0 ||
-      parseDisplayData(displayData)
-        .filter(
-            ({ row, column, value }) => 
-              row !== undefined && column !== undefined && value !== undefined
-        )?.length !== 0
-    )
+  const validData = displayData !== undefined 
+  const parsedData = parseDisplayData(displayData)
+
     console.log({validData, displayData, parsed: parseDisplayData( displayData )})
 
   if (validData && onCreate)  {
+    console.log("Tic Tac Toe - uncontrolled version")
     return (
       <UncontrolledVersion 
         rows={rows}
         columns={columns}
-        displayData={displayData}
+        displayData={parsedData}
         fontSize={fontSize}
         onCreate={onCreate}
       />
     )
   }
+  console.log("Tic Tac Toe - controlled version")
   return (
     <ControlledVersion
       rows={rows}
       columns={columns}
+      displayData={parsedData}
       fontSize={fontSize}
     />
   )
@@ -74,12 +63,13 @@ const TicTacToe = ({
 
 const Row = ({
   array,
-  column 
+  column, 
+  value 
 })=> (
   <View style={styles.row}>
     { 
       array.map( 
-        (value,row) => <Cell value={value} row={row} column={column}/> 
+        (value,row) => <Cell key={row+'-'+column} value={value} row={row} column={column}/> 
       )
     } 
   </View>
@@ -87,10 +77,6 @@ const Row = ({
 
 const Cell = ({ value, row, column }) => {
   const { fontSize, cellClick } = useContext(ComponentContext)
-  console.log({
-    fontSize,
-    cellClick
-  })
   return (
      <TouchableOpacity style={styles.button} onClick={()=>cellClick(row, column, value)}>
         <Text> { value } </Text>
@@ -109,7 +95,7 @@ const UncontrolledVersion = ({
   const data = useMemo(() =>{
     const newData = clone2DArray(INITIAL_STATE);
     if(!displayData) return newData
-    parseDisplayData(displayData).forEach(({ row = 1, column = 1, value = 'X' }) =>{
+    displayData.forEach(({ row = 1, column = 1, value = 'X' }) =>{
       newData[row][column] = value; 
     })  
     return newData
@@ -127,6 +113,7 @@ const UncontrolledVersion = ({
       if (value !== DEFAULT_VALUE) return
 
       const newValue = getValue(userTurn)
+      console.log("Clicked",{ row, column, newValue, userTurn })
       onCreate( column, row, newValue )
     }, [onCreate, userTurn]
   )
@@ -143,7 +130,7 @@ const UncontrolledVersion = ({
 		<View style={styles.wrapper}>
       <ComponentProvider value={context}>
         { data.map(
-            (array, index) => (<Row array={array} column={index} />)
+            (array, column) => (<Row key={column} array={array} column={column} />)
         )}  
       </ComponentProvider>
 		</View>
@@ -154,10 +141,20 @@ const ControlledVersion = ({
   rows,
   columns,
   fontSize,
+  initialState = INITIAL_STATE
 }) => {
   const [userTurn, setUserTurn] = useState(true);
 
   const [data, setData] = useState(INITIAL_STATE)
+
+  const initialData = useMemo(() =>{
+    const newData = clone2DArray(INITIAL_STATE);
+    if(!initialState) return newData
+    initialState.forEach(({ row = 1, column = 1, value = 'X' }) =>{
+      newData[row][column] = value; 
+    })  
+    setData(newData)
+  }, [initialData])
 
   const cellClick = (row, column, value) => {
     const newData = clone2DArray(data)
@@ -184,7 +181,7 @@ const ControlledVersion = ({
 		<View style={styles.wrapper}>
       <ComponentProvider value={context}>
         { data.map(
-            (array, index) => (<Row array={array} column={index} />)
+            (array, column) => (<Row key={column} array={array} column={column} />)
           ) 
         }  
       </ComponentProvider> 
