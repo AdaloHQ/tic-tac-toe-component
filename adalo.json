@@ -7,7 +7,7 @@
     }
   ],
   "author": "Jose Estremadoyro",
-  "description": "The most basic board game, connect to a collection with row, column and an X or Y as values. filter by a game column, and even play multiplayer with the advanced list refresh option.",
+  "description": "The most basic board game. Use it to play, in loading pages, in random places, use it anywhere! You can save your results into collection, and display results from a collection",
   "logo": "./logo.png",
   "demoAppURL": "https://app.adalo.com/apps/5ff37e8c-a7b3-4e85-b99a-857b506bd637/screens"
 }
