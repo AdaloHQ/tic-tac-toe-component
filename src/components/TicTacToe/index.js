@@ -26,6 +26,7 @@ const TicTacToe = ({
   fontSize,
   onCreate,
 }) => {
+  /*
   console.log({
     rows,
     columns,
@@ -33,13 +34,14 @@ const TicTacToe = ({
     fontSize,
     onCreate,
   })
+  */
   const validData = displayData !== undefined 
   const parsedData = parseDisplayData(displayData)
 
-    console.log({validData, displayData, parsed: parseDisplayData( displayData )})
+  //console.log({validData, displayData, parsed: parseDisplayData( displayData )})
 
   if (validData && onCreate)  {
-    console.log("Tic Tac Toe - uncontrolled version")
+    //console.log("Tic Tac Toe - uncontrolled version")
     return (
       <UncontrolledVersion 
         rows={rows}
@@ -50,7 +52,7 @@ const TicTacToe = ({
       />
     )
   }
-  console.log("Tic Tac Toe - controlled version")
+  //console.log("Tic Tac Toe - controlled version")
   return (
     <ControlledVersion
       rows={rows}
@@ -105,15 +107,13 @@ const UncontrolledVersion = ({
     const isEven = displayData?.length % 2 === 0
     return isEven ? true : false
   }, [displayData])
-  console.log({
-  })
 
   const cellClick = useCallback(
     (row, column, value) => {
       if (value !== DEFAULT_VALUE) return
 
       const newValue = getValue(userTurn)
-      console.log("Clicked",{ row, column, newValue, userTurn })
+      //console.log("Clicked",{ row, column, newValue, userTurn })
       onCreate( column, row, newValue )
     }, [onCreate, userTurn]
   )
