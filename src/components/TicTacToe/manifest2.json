@@ -33,6 +33,29 @@
   ],
   "childComponents": [
      {
+       "name": "dimensions",
+       "props": [
+          {
+            "name": "rows",
+            "displayName": "Rows",
+            "type": "number",
+            "default": "3"
+          },
+          {
+            "name": "columns",
+            "displayName": "Columns",
+            "type": "number",
+            "default": "3"
+          },
+          {
+            "name": "fontSize",
+            "displayName": "Font Size",
+            "type": "number",
+            "default": "16"
+          }
+       ]
+     },
+     {
        "name": "cell",
        "displayName": "Cells",
        "role": "listItem",
